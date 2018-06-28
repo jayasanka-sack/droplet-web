@@ -68,7 +68,7 @@
                                 <!--</div>-->
 
                                 <!---------------------------------------------------form-start-------------------------------------------------------->
-                                <form class="form" action="" method="post">
+                                <form class="form" action="" method="get">
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -89,14 +89,14 @@
                                             <input id="password" name="password" type="password" placeholder="Password..." class="form-control"/>
                                         </div>
                                     </div>
-                                    <!--<div class="form-group" style="position: relative;top: 20px;left: 30px">-->
-                                        <!--<label class="form-check-label">-->
-                                            <!--Forgot Password?-->
-                                            <!--<a href="psswd-reset-page.html">Reset it.</a>.-->
-                                        <!--</label>-->
-                                    <!--</div>-->
+                                    <div class="form-group" style="position: relative;top: 20px;left: 30px">
+                                        <label class="form-check-label">
+                                            Forgot Password?
+                                            <a href="psswd-reset-page.html">Reset it.</a>.
+                                        </label>
+                                    </div>
                                     <div class="text-center">
-                                        <button  name="submit" type="submit" value="Login" id="bttn-login" class="btn btn-primary btn-round">Get Started</button>
+                                        <button type="submit" name="submit" value="Login" id="bttn-login" class="btn btn-primary btn-round">Get Started</button>
                                     </div>
                                 </form>
                                 <!---------------------------------------------------form-end-------------------------------------------------------->
@@ -133,5 +133,4 @@
 <script src="assets/js/material-kit.js?v=2.0.3" type="text/javascript"></script>
 <!--<script src="assets/js/app/LoginPage.js"></script>-->
 </body>
-
 </html>

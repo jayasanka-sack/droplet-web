@@ -11,21 +11,64 @@ function updateCurrentStatus(id) {
             $('#val-usage-month').text(data["usage"]["month"]+" L");
             $('#val-remaining-level').text(data["level"]["volume"]+" L");
             let percentage = data["level"]["percentage"];
-            let dataPreferences = {
-                labels: [percentage+'%', (100-percentage)+'%'],
-                series: [percentage, (100-percentage)]
-            };
-            let optionsPreferences = {
+// --------------------------------------------------------------------------
+            window.setTimeout(2500);
+            var chart = new Chartist.Pie('#chartWaterLevel', {
+                series: [percentage, (100-percentage)],
+                labels: [percentage, (100-percentage)]
+            }, {
                 donut: true,
-                donutWidth: 40,
-                startAngle: 0,
-                total: 100,
-                showLabel: false,
-                axisX: {
-                    showGrid: false
+                donutWidth: 60,
+                showLabel: true
+            });
+
+            chart.on('draw', function(data) {
+                if(data.type === 'slice') {
+                    // Get the total path length in order to use for dash array animation
+                    var pathLength = data.element._node.getTotalLength();
+
+                    // Set a dasharray that matches the path length as prerequisite to animate dashoffset
+                    data.element.attr({
+                        'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
+                    });
+
+                    // Create animation definition while also assigning an ID to the animation for later sync usage
+                    var animationDefinition = {
+                        'stroke-dashoffset': {
+                            id: 'anim' + data.index,
+                            dur: 1000,
+                            from: -pathLength + 'px',
+                            to:  '0px',
+                            easing: Chartist.Svg.Easing.easeOutQuint,
+                            // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
+                            fill: 'freeze'
+                        }
+                    };
+
+                    // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
+                    if(data.index !== 0) {
+                        animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
+                    }
+
+                    // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
+                    data.element.attr({
+                        'stroke-dashoffset': -pathLength + 'px'
+                    });
+
+                    // We can't use guided mode as the animations need to rely on setting begin manually
+                    // See http://gionkunz.github.io/chartist-js/api-documentation.html#chartistsvg-function-animate
+                    data.element.animate(animationDefinition, false);
                 }
-            };
-            Chartist.Pie('#chartWaterLevel', dataPreferences);
+            });
+            chart.on('created', function() {
+                if(window.__anim21278907124) {
+                    clearTimeout(window.__anim21278907124);
+                    window.__anim21278907124 = null;
+                }
+                window.__anim21278907124 = setTimeout(chart.update.bind(chart), 6000);
+            });
+
+            // --------------------------------------------------------------------------
             updateLastDays(id);
             updateLastMonths(id);
             updateLastYears(id);
@@ -68,8 +111,13 @@ function updateLastDays(id){
                 lineSmooth: Chartist.Interpolation.simple({
                     divisor: 3
                 }),
-                showLine: false,
-                showPoint: false,
+                // showLine: false,
+                // showPoint: false,
+                plugins: [
+                    Chartist.plugins.ctThreshold({
+                        threshold: 150
+                    })
+                ]
             };
             var responsiveSales = [
                 ['screen and (max-width: 640px)', {
@@ -91,9 +139,9 @@ function updateLastMonths(id){
         type: 'get',
         url: api + '/devices/' + id + '/usage/years/months',
         dataType: 'json',
-        error: function (xhr) {
-            alert(xhr.responseText);
-        },
+        // error: function (xhr) {
+        //     alert(xhr.responseText);
+        // },
         success: function (data) {
             var days = [];
             var usageData = [];
@@ -119,8 +167,13 @@ function updateLastMonths(id){
                 lineSmooth: Chartist.Interpolation.simple({
                     divisor: 3
                 }),
-                showLine: false,
-                showPoint: false,
+                // showLine: false,
+                // showPoint: false,
+                plugins: [
+                    Chartist.plugins.ctThreshold({
+                        threshold: 150
+                    })
+                ]
             };
             var responsiveSales = [
                 ['screen and (max-width: 640px)', {
@@ -170,8 +223,13 @@ function updateLastYears(id){
                 lineSmooth: Chartist.Interpolation.simple({
                     divisor: 3
                 }),
-                showLine: false,
-                showPoint: false,
+                // showLine: false,
+                // showPoint: false,
+                plugins: [
+                    Chartist.plugins.ctThreshold({
+                        threshold: 1000
+                    })
+                ]
             };
             var responsiveSales = [
                 ['screen and (max-width: 640px)', {

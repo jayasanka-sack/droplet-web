@@ -60,3 +60,6 @@ function initApp() {
     document.getElementById('bttn-login').addEventListener('click', toggleSignIn, false);
 }
 
+window.onload = function() {
+    initApp();
+};

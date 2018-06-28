@@ -21,6 +21,8 @@ if (!isset($_SESSION['deviceId'])) exit();
     <link href="assets/css/light-bootstrap-dashboard.css?v=2.0.1" rel="stylesheet"/>
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="assets/css/demo.css" rel="stylesheet"/>
+<!--    <link href="assets/css/chartist.min.css" rel="stylesheet"/>-->
+    <link href="assets/css/plugins/chartist-threshold.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -174,6 +176,7 @@ if (!isset($_SESSION['deviceId'])) exit();
 <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
 <script src="assets/js/light-bootstrap-dashboard.js?v=2.0.1" type="text/javascript"></script>
 <script src="assets/js/app/dashboard.js" type="text/javascript"></script>
+<script src="assets/js/plugins/chartist-plugin-threshold.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
 
