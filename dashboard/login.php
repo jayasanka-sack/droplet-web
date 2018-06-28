@@ -3,8 +3,8 @@ session_start();
 //$_SESSION['deviceId'] = 1;
 //header('Location: index.php');
 //exit();
-include "../../api/v1/config/connection.php";
-include "../../api/v1/config/functions.php";
+include "../api/v1/config/connection.php";
+include "../api/v1/config/functions.php";
 
 $error = ''; // Variable To Store Error Message
 if (isset($_GET['submit'])) {

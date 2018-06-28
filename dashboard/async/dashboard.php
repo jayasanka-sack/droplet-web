@@ -117,7 +117,7 @@ date_default_timezone_set("Asia/Colombo");
                 <p style="margin-bottom: 8px">Monthly Goal</p>
                 <div class="progress" style="height: 25px;background:linear-gradient(to right, #b2d8ff 80% ,#ffcccc 0);">
                     <div class="progress-bar bg-" role="progressbar" style="background-color: #4ca6ff;width: 40%; height: 25px" aria-valuenow="40" aria-valuemin="0" aria-valuemax="80"><p>40%</p></div>
-                    <!--                    <div class="progress-bar bg-danger" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>-->
+                    <!--<div class="progress-bar bg-danger" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>-->
                 </div>
 
             </div>
