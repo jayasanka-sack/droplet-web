@@ -23,6 +23,19 @@ if (!isset($_SESSION['deviceId'])) exit();
     <link href="assets/css/demo.css" rel="stylesheet"/>
 <!--    <link href="assets/css/chartist.min.css" rel="stylesheet"/>-->
     <link href="assets/css/plugins/chartist-threshold.css" rel="stylesheet"/>
+    <style>
+        .tooltip{
+            position:relative;
+            float:right;
+        }
+        .tooltip > .tooltip-inner {background-color: #eebf3f; padding:5px 15px; color:rgb(23,44,66); font-weight:bold; font-size:13px;}
+        .popOver + .tooltip > .tooltip-arrow {	border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid #eebf3f;}
+
+        section{
+            margin:100px auto;
+            height:1000px;
+        }
+    </style>
 </head>
 
 <body>
@@ -39,11 +52,29 @@ if (!isset($_SESSION['deviceId'])) exit();
                     Droplet
                 </a>
             </div>
-            <ul class="nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="dashboard.html">
+            <ul class="nav" id="navBar">
+                <li class="nav-item" id="nav1">
+                    <a class="nav-link" href="#dashboard-xx">
                         <i class="nc-icon nc-alien-33"></i>
                         <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav2">
+                    <a class="nav-link" href="#daily-usage-xx">
+                        <i class="nc-icon nc-alien-33"></i>
+                        <p>Daily usage</p>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav3">
+                    <a class="nav-link" href="#monthly-usage-xx">
+                        <i class="nc-icon nc-alien-33"></i>
+                        <p>Monthly usage</p>
+                    </a>
+                </li>
+                <li class="nav-item" id="nav4">
+                    <a class="nav-link" href="#annual-usage-xx">
+                        <i class="nc-icon nc-alien-33"></i>
+                        <p>Annual usage</p>
                     </a>
                 </li>
             </ul>
